@@ -1,0 +1,3 @@
+FROM nginx:latest
+
+COPY socket_client.html /usr/share/nginx/html/socket_client.html

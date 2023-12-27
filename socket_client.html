@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket Client</title>
+    <script>
+        function sendMessage() {
+            var word = document.getElementById('word').value.trim(); // Get the input value
+            var socket = new WebSocket("ws://localhost:8000"); // Create WebSocket instance
+
+            socket.onopen = function(event) {
+                socket.send(word); // Send the word to the server
+            };
+
+            socket.onmessage = function(event) {
+                var responses = event.data.split('\n'); // Split responses by new line
+                var formattedResponse = '';
+
+                // Constructing formatted response with each interpretation on a new line
+                for (var i = 0; i < responses.length; i++) {
+                    formattedResponse += responses[i] + '<br>'; // Adding a line break after each response
+                }
+
+                // Displaying formatted response
+                document.getElementById('response').innerHTML = formattedResponse;
+                socket.close(); // Close the connection
+            };
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="word" placeholder="Enter word">
+    <button onclick="sendMessage()">Send</button>
+    <div id="response"></div>
+</body>
+</html>
+
+
