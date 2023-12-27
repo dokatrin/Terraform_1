@@ -5,7 +5,7 @@
     <script>
         function sendMessage() {
             var word = document.getElementById('word').value.trim(); // Get the input value
-            var socket = new WebSocket("ws://localhost:8000"); // Create WebSocket instance
+            var socket = new WebSocket("ws://10.20.14.189:8000"); // Create WebSocket instance
 
             socket.onopen = function(event) {
                 socket.send(word); // Send the word to the server
